@@ -60,7 +60,7 @@ jobs:
           echo "Deploying agent: $AGENT_NAME"
 
           curl -X POST \
-            "$PROJECT_ENDPOINT/agents/$AGENT_NAME?api-version=2025-05-01" \
+            "$PROJECT_ENDPOINT/agents/$AGENT_NAME?api-version=v1" \
             -H "Authorization: Bearer ${{ steps.token.outputs.token }}" \
             -H "Content-Type: application/json" \
             --data-binary @"$f"
