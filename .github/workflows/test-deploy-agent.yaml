@@ -54,7 +54,8 @@ jobs:
 
       - name: Deploy changed agents (TEST)
         run: |
-          AGENT_NAME="agents/deploy-test.json"
+          f="agents/deploy-test.json"
+          AGENT_NAME="githubactions-deploy-test"
 
           echo "Deploying agent: $AGENT_NAME"
 
