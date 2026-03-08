@@ -53,7 +53,6 @@ jobs:
           echo "token=$TOKEN" >> $GITHUB_OUTPUT
 
       - name: Deploy changed agents (TEST)
-        if: steps.changes.outputs.files != ''
         run: |
           AGENT_NAME="agents/deploy-test.json"
 
