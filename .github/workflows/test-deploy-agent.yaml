@@ -63,8 +63,8 @@ jobs:
             --arg name "$AGENT_NAME" \
             --slurpfile def "$f" \
             '{
-              name: $name,
-              definition: $def[0]
+              "name": $name,
+              "definition": $def[0]
             }')
 
           curl -X POST \
