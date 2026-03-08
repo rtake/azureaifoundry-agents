@@ -1,10 +1,7 @@
 name: Test Deploy Agents
 
 on:
-  # push:
-  #   branches:
-  #     - develop
-  workflow_dispatch:
+  workflow_dispatch: # 手動実行 (テスト用)
 
 permissions:
   id-token: write
@@ -30,20 +27,6 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Detect changed agents
-        id: changes
-        run: |
-          CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^agents/.*\.json$' || true)
-          echo "files=$CHANGED" >> $GITHUB_OUTPUT
-
-      - name: Print changed agents
-        if: steps.changes.outputs.files != ''
-        run: |
-          for f in ${{ steps.changes.outputs.files }}; do
-            echo "---- $f ----"
-            cat "$f"
-          done
-
       - name: Get Foundry token
         id: token
         run: |
@@ -52,12 +35,10 @@ jobs:
             --query accessToken -o tsv)
           echo "token=$TOKEN" >> $GITHUB_OUTPUT
 
-      - name: Deploy changed agents (TEST)
+      - name: Deploy agents with Azure REST API (TEST)
         run: |
           f="agents/deploy-test.json"
-          AGENT_NAME="20260307-test-8"
-
-          echo "Deploying agent: $AGENT_NAME"
+          AGENT_NAME="test-deploy-agent"
 
           BODY=$(jq -n \
             --arg name "$AGENT_NAME" \
