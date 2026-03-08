@@ -55,15 +55,14 @@ jobs:
       - name: Deploy changed agents (TEST)
         if: steps.changes.outputs.files != ''
         run: |
-          for f in ${{ steps.changes.outputs.files }}; do
-            AGENT_NAME=$(basename $f .json)
+          AGENT_NAME="agents/deploy-test.json"
 
-            echo "Deploying agent: $AGENT_NAME"
+          echo "Deploying agent: $AGENT_NAME"
 
-            curl -X POST \
-              "$PROJECT_ENDPOINT/agents/$AGENT_NAME?api-version=2025-05-01" \
-              -H "Authorization: Bearer ${{ steps.token.outputs.token }}" \
-              -H "Content-Type: application/json" \
-              --data-binary @"$f"
+          curl -X POST \
+            "$PROJECT_ENDPOINT/agents/$AGENT_NAME?api-version=2025-05-01" \
+            -H "Authorization: Bearer ${{ steps.token.outputs.token }}" \
+            -H "Content-Type: application/json" \
+            --data-binary @"$f"
 
           done
