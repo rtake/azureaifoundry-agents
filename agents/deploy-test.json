@@ -1,10 +1,6 @@
 {
-  "name": "test-agent",
-  "description": "Test agent deployed from GitHub Actions",
-  "model": "gpt-4.1-mini",
-  "instructions": "You are a helpful test assistant used for CI/CD deployment testing.",
-  "tools": [],
-  "response_format": {
-    "type": "text"
-  }
+  "kind": "prompt",
+  "model": "gpt-4.1",
+  "instructions": "bbb っっcfafあああああああfaaaaあdふぁファfadsafs",
+  "tools": [{ "type": "web_search_preview" }]
 }
