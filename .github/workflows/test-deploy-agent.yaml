@@ -72,5 +72,3 @@ jobs:
             -H "Authorization: Bearer ${{ steps.token.outputs.token }}" \
             -H "Content-Type: application/json" \
             -d "$BODY"
-
-          done
